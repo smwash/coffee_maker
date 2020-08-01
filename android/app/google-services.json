@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "115096913547",
+    "firebase_url": "https://coffee-maker-152ee.firebaseio.com",
+    "project_id": "coffee-maker-152ee",
+    "storage_bucket": "coffee-maker-152ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115096913547:android:52bcdb8b902f9dfabf368e",
+        "android_client_info": {
+          "package_name": "com.samz.coffee_maker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115096913547-irvt0asr6n9q3565hdj9ma3e92vberp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAPIq3vgsPjIrDZ4tJ0Zw-CIzjRol-MKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115096913547-irvt0asr6n9q3565hdj9ma3e92vberp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
