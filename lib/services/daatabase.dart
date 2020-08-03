@@ -14,6 +14,7 @@ class Database {
   Future<void> updateUserData(
       {String name, String sugars, int strength}) async {
     return await coffeeCollection.document(uid).setData({
+      //'id': uid,
       'name': name,
       'sugars': sugars,
       'strength': strength,

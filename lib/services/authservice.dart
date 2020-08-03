@@ -2,16 +2,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_maker/model/user.dart';
 import 'package:coffee_maker/services/daatabase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-class AuthService {
-  var message = '';
-
+class AuthService with ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
   Firestore _firestore = Firestore.instance;
+  var message = '';
+  AuthResult authResult;
+  FirebaseUser user;
+  UserData currentuser;
 
-  User _userFromFirebaseUser(FirebaseUser user) {
+  FirebaseUser current;
+  String userUid;
+
+  User userFromFirebaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
+  }
+
+  Future<String> getCurrentUserID() async {
+    final user = (await _auth.currentUser()).uid;
+    userUid = user;
+    notifyListeners();
+  }
+
+  Future getCurrentUser() async {
+    final user = await _auth.currentUser();
+    current = user;
+    notifyListeners();
   }
 
 //signIn with email and pass.
@@ -19,7 +37,8 @@ class AuthService {
     try {
       AuthResult authResult = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = authResult.user;
+      user = authResult.user;
+
       return user;
     } on PlatformException catch (error) {
       if (error != null) {
@@ -35,7 +54,7 @@ class AuthService {
   Future signUpWithEmailAndPassword(
       {String email, String password, String username}) async {
     try {
-      AuthResult authResult = await _auth.createUserWithEmailAndPassword(
+      authResult = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       await _firestore
           .collection('users')
@@ -43,9 +62,16 @@ class AuthService {
           .setData({
         'email': email,
         'username': username,
+        'id': authResult.user.uid,
       });
-      await Database(uid: authResult.user.uid)
-          .updateUserData(name: username, sugars: '0', strength: 100);
+
+      FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+      _firestore.collection('coffee').document(currentUser.uid).setData({
+        'id': currentUser.uid,
+        'name': username,
+        'sugars': '0',
+        'strength': 100,
+      });
     } on PlatformException catch (error) {
       if (error != null) {
         message = error.message;

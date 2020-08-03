@@ -20,6 +20,9 @@ class _AuthScreenState extends State<AuthScreen> {
     BuildContext ctx,
   }) async {
     try {
+      setState(() {
+        isLoading = true;
+      });
       if (isLogin) {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
@@ -27,7 +30,13 @@ class _AuthScreenState extends State<AuthScreen> {
         await _auth.signUpWithEmailAndPassword(
             email: email, password: password, username: username);
       }
+      setState(() {
+        isLoading = false;
+      });
     } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
       print(error.toString());
     }
   }
