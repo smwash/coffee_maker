@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_maker/constants.dart';
-import 'package:coffee_maker/model/user.dart';
+
 import 'package:coffee_maker/services/authservice.dart';
 import 'package:coffee_maker/services/daatabase.dart';
 import 'package:coffee_maker/widgets/loading.dart';
@@ -23,7 +23,7 @@ class _SettingsFormState extends State<SettingsForm> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<AuthService>(context);
-    var user1 = userProvider.getCurrentUser();
+
     var user = userProvider.current;
 
     return StreamBuilder(

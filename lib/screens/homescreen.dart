@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coffee_maker/model/user.dart';
 
 import 'package:coffee_maker/services/authservice.dart';
-import 'package:coffee_maker/services/daatabase.dart';
 
 import 'package:coffee_maker/widgets/coffeetile.dart';
 import 'package:coffee_maker/widgets/loading.dart';
 import 'package:coffee_maker/widgets/settingsform.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override

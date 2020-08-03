@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_maker/model/user.dart';
-import 'package:coffee_maker/services/daatabase.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +20,7 @@ class AuthService with ChangeNotifier {
     return user != null ? User(uid: user.uid) : null;
   }
 
-  Future<String> getCurrentUserID() async {
+  Future getCurrentUserID() async {
     final user = (await _auth.currentUser()).uid;
     userUid = user;
     notifyListeners();
